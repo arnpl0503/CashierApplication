@@ -1,0 +1,42 @@
+using CashierApplication02;
+using System;
+using System.Collections.Generic;
+using System;
+
+namespace ItemNameSpace
+{
+    internal class DiscountedItem : Item
+    {
+        private double itemDiscount;
+        private double discountedPrice;
+        private double paymentAmount;
+        private double change;
+
+        public DiscountedItem(string name, double price, int quantity, double discount)
+            : base(name, price, quantity)
+        {
+            this.itemDiscount = discount * 0.01;  
+            this.discountedPrice = 0.0;
+            this.paymentAmount = 0.0;
+            this.change = 0.0;
+        }
+
+        public override double getTotalPrice()
+        {
+            discountedPrice = item_price * (1 - itemDiscount);
+            total_price = discountedPrice * item_quantity;
+            return total_price;
+        }
+
+        public override void setPayment(double amount)
+        {
+            paymentAmount = amount;
+        }
+
+        public double getChange(double Total_amount)
+        {
+            change = paymentAmount - Total_amount;
+            return change;
+        }
+    }
+}
